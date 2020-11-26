@@ -6,7 +6,7 @@
 
 <html lang="en">
 <head>
-<title>MIE350 Sample Web App - Add A Student</title>
+<title>SkuleBus - Create an Account</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,7 +20,7 @@
 <!-- Date Picker Javascript -->
 <!-- https://jqueryui.com/datepicker/ -->
 <link rel="stylesheet"
-	href="//code.j	query.com/ui/1.12.1/themes/base/jquery-ui.css">
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -28,41 +28,31 @@
 </head>
 <body>
 
-	<%@ include file="navbar_loggedin.jsp"%>
+	<%@ include file="navbar.jsp"%>
 
-	<%
-		Member member = (Member) session.getAttribute("currentSessionUser");
-
-		String username = (String) session.getAttribute("username");
-		String firstname = (String) session.getAttribute("firstname");
-		String lastname = (String) session.getAttribute("lastname");
-	%>
+	
 
 	<div class="container-fluid text-center">
 		<div class="row content">
-			<%@ include file="sidebar_loggedin.jsp"%>
+			
 			<div class="col-sm-8 text-left">
-				<h1>Add A Student</h1>
+				<h1>Create an Account</h1>
 
-				<script>
-					$(function() {
-						$('input[name=dob]').datepicker();
-					});
-				</script>
-				Note: the Student ID is a fixed field and cannot be changed. <br>
-				<br>
 				
-				<form method="POST" action='StudentController' name="frmAddUser">
-					Student ID*: <input type="text" readonly="readonly"
-						name="studentid" value="<c:out value="${student.studentid}" />"><br>
+				 <br>
+				<br>
+
+				<form method="POST" action='SignupController' name="frmAddUser">
+					Username: <input type="text" name="username"
+						value="<c:out value="${member.username}" />"><br>
+					Password: <input type="text" name="password"
+						value="<c:out value="${member.password}" />"><br>
 					First Name: <input type="text" name="firstName"
-						value="<c:out value="${student.firstName}" />"><br>
+						value="<c:out value="${member.firstName}" />"><br>
 					Last Name : <input type="text" name="lastName"
-						value="<c:out value="${student.lastName}" />"><br>DOB
-					(MM/dd/yyyy): <input type="text" name="dob"
-						value="<fmt:formatDate pattern="MM/dd/yyyy" value="${student.dob}" />"><br>
+						value="<c:out value="${member.lastName}" />"><br>
 					Email: <input type="text" name="email"
-						value="<c:out value="${student.email}" />"><br> <br>
+						value="<c:out value="${member.email}" />"><br> <br>
 					<input type="submit" class="btn btn-info" value="Submit" />
 				</form>
 

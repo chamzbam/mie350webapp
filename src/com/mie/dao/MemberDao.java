@@ -11,7 +11,6 @@ import java.util.List;
 import com.mie.util.DbUtil;
 import com.mie.model.*;
 import com.mie.controller.*;
-
 import com.mie.util.*;
 
 public class MemberDao {
@@ -22,6 +21,7 @@ public class MemberDao {
 	 */
 	static Connection currentCon = null;
 	static ResultSet rs = null;
+	private Connection connection;
 
 	public static Member login(Member member) {
 
@@ -83,4 +83,33 @@ public class MemberDao {
 		return member;
 
 	}
+	
+	public void addMember(Member member) {
+		/**
+		 * This method adds a new member to the database.
+		 * 
+		 * 
+		 */
+		connection = DbUtil.getConnection();
+		
+		
+		
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("insert into members(Firstname,Lastname,Email,Username,Password) values (?, ?, ?, ?,?)");
+			// Parameters start with 1
+			preparedStatement.setString(1, member.getFirstName());
+			preparedStatement.setString(2, member.getLastName());
+			preparedStatement.setString(3, member.getEmail());
+			preparedStatement.setString(4, member.getUsername());
+			preparedStatement.setString(5, member.getPassword());
+			
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+  
+	
 }

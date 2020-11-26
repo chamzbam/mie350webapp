@@ -19,6 +19,26 @@
 	</servlet-mapping>
 	<servlet>
 		<description></description>
+		<display-name>SignupController</display-name>
+		<servlet-name>SignupController</servlet-name>
+		<servlet-class>com.mie.controller.SignupController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SignupController</servlet-name>
+		<url-pattern>/SignupController</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+		<description></description>
+		<display-name>PostController</display-name>
+		<servlet-name>PostController</servlet-name>
+		<servlet-class>com.mie.controller.PostController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostController</servlet-name>
+		<url-pattern>/PostController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
 		<display-name>SearchController</display-name>
 		<servlet-name>SearchController</servlet-name>
 		<servlet-class>com.mie.controller.SearchController</servlet-class>

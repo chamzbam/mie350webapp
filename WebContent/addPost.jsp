@@ -42,27 +42,18 @@
 		<div class="row content">
 			<%@ include file="sidebar_loggedin.jsp"%>
 			<div class="col-sm-8 text-left">
-				<h1>Add A Student</h1>
+				<h1>Create a Post</h1>
 
-				<script>
-					$(function() {
-						$('input[name=dob]').datepicker();
-					});
-				</script>
-				Note: the Student ID is a fixed field and cannot be changed. <br>
-				<br>
 				
-				<form method="POST" action='StudentController' name="frmAddUser">
-					Student ID*: <input type="text" readonly="readonly"
-						name="studentid" value="<c:out value="${student.studentid}" />"><br>
-					First Name: <input type="text" name="firstName"
-						value="<c:out value="${student.firstName}" />"><br>
-					Last Name : <input type="text" name="lastName"
-						value="<c:out value="${student.lastName}" />"><br>DOB
-					(MM/dd/yyyy): <input type="text" name="dob"
-						value="<fmt:formatDate pattern="MM/dd/yyyy" value="${student.dob}" />"><br>
-					Email: <input type="text" name="email"
-						value="<c:out value="${student.email}" />"><br> <br>
+				
+				
+				<form method="POST" action='PostController' name="frmAddPost">
+					Title*:<input type="text" name="title"
+						value="<c:out value="${post.title}" />"><br>
+					Post*: <input type="text" name="body" size="200"
+						value="<c:out value="${post.Body}" />"><br>
+					
+					
 					<input type="submit" class="btn btn-info" value="Submit" />
 				</form>
 
