@@ -1,5 +1,7 @@
 package com.mie.controller;
 
+
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,10 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.mie.dao.CommentDao;
 import com.mie.dao.PostDao;
 import com.mie.dao.StudentDao;
+import com.mie.dao.TextbookDao;
 import com.mie.model.Post;
 import com.mie.model.Student;
+import com.mie.model.Textbook;
 
-public class PostController extends HttpServlet {
+public class TextbookController extends HttpServlet {
 	/**
 	 * This class handles all insert/edit/list functions of the servlet.
 	 * 
@@ -29,21 +33,23 @@ public class PostController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static String INSERT = "/addPost.jsp";
+	private static String INSERT = "/addTextbook.jsp";
 	private static String EDIT = "/editStudent.jsp";
-	private static String LIST_POST = "/listPost.jsp";
+	private static String LIST_POST = "/listTextbook.jsp";
 	private static String LIST_POST_ADMIN = "/listPostAdmin.jsp";
 
 	private PostDao daoP;
 	private CommentDao daoC;
+	private TextbookDao daoT;
 
 	/**
 	 * Constructor for this class.
 	 */
-	public PostController() {
+	public TextbookController() {
 		super();
 		daoP = new PostDao();
 		daoC = new CommentDao();
+		daoT = new TextbookDao();
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -65,7 +71,7 @@ public class PostController extends HttpServlet {
 
 		  if (action.equalsIgnoreCase("listPost")) {
 			forward = LIST_POST;
-			request.setAttribute("posts", daoP.getAllPosts());
+			request.setAttribute("textbooks", daoT.getAllPosts());
 			
 			
 			//request.setAttribute("comments", dao.getAllComments());
@@ -82,7 +88,7 @@ public class PostController extends HttpServlet {
 		  
 		  else {
 			forward = LIST_POST;
-			request.setAttribute("posts", daoP.getAllPosts());
+			request.setAttribute("textbooks", daoT.getAllPosts());
 			
 		}
 
@@ -96,10 +102,11 @@ public class PostController extends HttpServlet {
 		 * This method retrieves all of the information entered in the form on
 		 * the addStudent.jsp or the editStudent.jsp pages.
 		 */
-		Post post = new Post();
-		post.setTitle(request.getParameter("title"));
-		post.setBody(request.getParameter("body"));
-		post.setDate(new java.util.Date());
+		Textbook textbook = new Textbook();
+		textbook.setTitle(request.getParameter("title"));
+		textbook.setBody(request.getParameter("body"));
+		textbook.setPrice(Integer.parseInt(request.getParameter("price")));
+		
 		
 		
 		
@@ -109,7 +116,7 @@ public class PostController extends HttpServlet {
 		 * be added to the list of Student objects.
 		 */
 		
-			daoP.addPost(post);
+			daoT.addPost(textbook);
 		
 			/**
 			 * Otherwise, if the field is already filled (this occurs when the

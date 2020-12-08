@@ -1,5 +1,5 @@
 <nav class="navbar navbar-inverse">
-	<div class="container-fluid">
+	<div class="container-fluid bg-primary text-white">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
@@ -11,13 +11,19 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp">Home</a></li>
-				<li><a href="about.jsp">About</a></li>
+				
+				
 				
 				<li><a
 					href="/mie350webapp/PostController?action=listPost">Forum
 						</a></li>		
 				
-				
+				<li><a
+					href="/mie350webapp/TextbookController?action=listPost">Textbook Exchange
+						</a></li>		
+				<li><a
+					href="/mie350webapp/StudentController?action=listStudent">Contacts
+						</a></li>
 				
 				
 			</ul>

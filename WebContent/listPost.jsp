@@ -47,11 +47,25 @@
       <p><fmt:formatDate pattern="yyyy-MMM-dd"
 										value="${post.getDate()}" /></p>
       <p><c:out value="${post.getBody()}" /></p>
+      
+      
     </div>  
-    <br />   <br />
+    <br />  
+    <form action="CommentController" method="get">
+         
+    <button name="ID" value="${post.ID}">See Comments</button>
+	</form>
+	
+     <br />
+
+
+
+
+
     
 </c:forEach>
-	
+
+
 					
 
 				<br /> <br />

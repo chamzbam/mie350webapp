@@ -3,7 +3,10 @@ package com.mie.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,10 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.mie.dao.CommentDao;
 import com.mie.dao.PostDao;
 import com.mie.dao.StudentDao;
+import com.mie.model.Comment;
+import com.mie.model.Member;
 import com.mie.model.Post;
 import com.mie.model.Student;
 
-public class PostController extends HttpServlet {
+public class CommentController extends HttpServlet {
 	/**
 	 * This class handles all insert/edit/list functions of the servlet.
 	 * 
@@ -31,21 +36,24 @@ public class PostController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static String INSERT = "/addPost.jsp";
 	private static String EDIT = "/editStudent.jsp";
-	private static String LIST_POST = "/listPost.jsp";
+	private static String LIST_COMMENTS = "/listComments.jsp";
 	private static String LIST_POST_ADMIN = "/listPostAdmin.jsp";
+	private static String LIST_COMMENTS_ADMIN = "/listPostAdmin.jsp";
 
-	private PostDao daoP;
 	private CommentDao daoC;
+	private PostDao    daoP;
 
 	/**
 	 * Constructor for this class.
 	 */
-	public PostController() {
+	public CommentController() {
 		super();
-		daoP = new PostDao();
 		daoC = new CommentDao();
+		daoP = new PostDao();
 	}
-
+	
+	
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
@@ -63,32 +71,65 @@ public class PostController extends HttpServlet {
 		String forward = "";
 		String action = request.getParameter("action");
 
-		  if (action.equalsIgnoreCase("listPost")) {
-			forward = LIST_POST;
-			request.setAttribute("posts", daoP.getAllPosts());
+		 
 			
+			  String postID_S = (String) request.getParameter("ID");
+			  Integer postID = Integer.parseInt(postID_S);
+			 
+			  ArrayList postComments = null;
+			  
+			  Iterator<Post> posts = daoP.getAllPosts().iterator(); 
+				
+				while(posts.hasNext()){
+					
+					Post p=posts.next();
+					
+					Iterator<Comment> comments = p.getComments().iterator(); 
+					while(comments.hasNext()){
+						
+						Comment c= comments.next();
+						System.out.print(c.getBody());
+					}
+					
+					
+					
+					
+					if(p.getID()==postID){
+						
+						postComments=new ArrayList(p.getComments());
+						
+					}
+					
+										
+				}
+				
+				
+				
+				
+				
+			  
+			  
+			  
+			  
+			  
+			  
+			forward = LIST_COMMENTS;
+			
+			request.setAttribute("comments", postComments);
 			
 			//request.setAttribute("comments", dao.getAllComments());
 			
-		} else if  (action.equalsIgnoreCase("listPostAdmin")) {
-			forward = LIST_POST_ADMIN;
-			request.setAttribute("posts", daoP.getAllPosts());
+		
 			
-			
-		}else if (action.equalsIgnoreCase("insert")) {
-			forward = INSERT;
-			
-		}
+		
 		  
-		  else {
-			forward = LIST_POST;
-			request.setAttribute("posts", daoP.getAllPosts());
-			
-		}
+		  
 
 		RequestDispatcher view = request.getRequestDispatcher(forward);
 		view.forward(request, response);
 	}
+
+
 	
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 
@@ -96,10 +137,36 @@ public class PostController extends HttpServlet {
 		 * This method retrieves all of the information entered in the form on
 		 * the addStudent.jsp or the editStudent.jsp pages.
 		 */
-		Post post = new Post();
-		post.setTitle(request.getParameter("title"));
-		post.setBody(request.getParameter("body"));
-		post.setDate(new java.util.Date());
+		Comment comment = new Comment();
+		comment.setBody(request.getParameter("comment"));
+		
+		String postID_S = request.getParameter("postID");
+		comment.setDate(new java.util.Date());
+		
+		int postID = Integer.parseInt(postID_S);
+		comment.setID(postID);
+		
+		
+		
+		Iterator<Post> posts = daoP.getAllPosts().iterator(); 
+		
+		while(posts.hasNext()){
+			
+			Post p=posts.next();
+			
+			if(p.getID()==postID){
+				
+				
+				p.addComment(comment);
+				daoC.addComment(comment);
+				
+			}
+			
+			
+			
+			
+		}
+		
 		
 		
 		
@@ -109,14 +176,14 @@ public class PostController extends HttpServlet {
 		 * be added to the list of Student objects.
 		 */
 		
-			daoP.addPost(post);
+		
 		
 			/**
 			 * Otherwise, if the field is already filled (this occurs when the
 			 * user is trying to Edit A Student), then the student's information
 			 * will be updated accordingly.
 			 */
-			RequestDispatcher view = request.getRequestDispatcher(LIST_POST);
+			RequestDispatcher view = request.getRequestDispatcher(LIST_POST_ADMIN);
 			
 			view.forward(request, response);
 		}

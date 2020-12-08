@@ -9,34 +9,36 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import com.mie.model.Comment;
 import com.mie.model.Post;
 import com.mie.model.Student;
 import com.mie.util.DbUtil;
 
-public class PostDao {
+public class CommentDao {
 
 	private Connection connection;
 	
-	public PostDao() {
+	public CommentDao() {
 		/**
 		 * Get the database connection.
 		 */
 		connection = DbUtil.getConnection();
 	}
 
-	public void addPost(Post post) {
+	public void addComment(Comment comment) {
 		/**
 		 * This method adds a new student to the database.
 		 */
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into Posts(PostTitle,PostBody,Date) values (?, ?, ?)");
+					.prepareStatement("insert into Comments(POSTID,Comment,Date) values (?, ?, ?)");
 			// Parameters start with 1
-			preparedStatement.setString(1, post.getTitle());
-			preparedStatement.setString(2, post.getBody());
+			preparedStatement.setInt(1, comment.getID());
+			preparedStatement.setString(2, comment.getBody());
 			
-			java.sql.Date sDate = new java.sql.Date(post.getDate().getTime());		
+			java.sql.Date sDate = new java.sql.Date(comment.getDate().getTime());		
 			preparedStatement.setDate(3, sDate);
+			
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -45,40 +47,30 @@ public class PostDao {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	public List<Post> getAllPosts() {
+	public List<Comment> getAllComments() {
 		/**
 		 * This method returns the list of all students in the form of a List
 		 * object.
 		 */
-		List<Post> posts = new ArrayList<Post>();
+		List<Comment> comments = new ArrayList<Comment>();
 		try {
 			Statement statement = connection.createStatement();
 			// System.out.println("getting students from table");
-			ResultSet rs = statement.executeQuery("select * from Posts");
+			ResultSet rs = statement.executeQuery("select * from Comments");
 			while (rs.next()) {
-				Post post = new Post();
-				post.setTitle(rs.getString("PostTitle"));
-				post.setBody(rs.getString("PostBody"));
-				post.setDate(rs.getDate("Date"));
-				post.setID(rs.getInt("PostID"));
+				Comment	comment = new Comment();
+				comment.setID(rs.getInt("POSTID"));
+				comment.setBody(rs.getString("Comment"));
+				comment.setDate(rs.getDate("Date"));
 				
-				
-				posts.add(post);
+				comments.add(comment);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return posts;
+		return comments;
 	}
-	
-	
 
 	
 	

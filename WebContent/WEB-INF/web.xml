@@ -39,6 +39,30 @@
 	</servlet-mapping>
 	<servlet>
 		<description></description>
+		<display-name>CommentController</display-name>
+		<servlet-name>CommentController</servlet-name>
+		<servlet-class>com.mie.controller.CommentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommentController</servlet-name>
+		<url-pattern>/CommentController</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>TextbookController</display-name>
+		<servlet-name>TextbookController</servlet-name>
+		<servlet-class>com.mie.controller.TextbookController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TextbookController</servlet-name>
+		<url-pattern>/TextbookController</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<servlet>
+		<description></description>
 		<display-name>SearchController</display-name>
 		<servlet-name>SearchController</servlet-name>
 		<servlet-class>com.mie.controller.SearchController</servlet-class>

@@ -11,32 +11,32 @@ import java.util.List;
 
 import com.mie.model.Post;
 import com.mie.model.Student;
+import com.mie.model.Textbook;
 import com.mie.util.DbUtil;
 
-public class PostDao {
+public class TextbookDao {
 
 	private Connection connection;
 	
-	public PostDao() {
+	public TextbookDao() {
 		/**
 		 * Get the database connection.
 		 */
 		connection = DbUtil.getConnection();
 	}
 
-	public void addPost(Post post) {
+	public void addPost(Textbook textbook) {
 		/**
 		 * This method adds a new student to the database.
 		 */
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into Posts(PostTitle,PostBody,Date) values (?, ?, ?)");
+					.prepareStatement("insert into Textbooks(TextBook,Description,Price) values (?, ?, ?)");
 			// Parameters start with 1
-			preparedStatement.setString(1, post.getTitle());
-			preparedStatement.setString(2, post.getBody());
+			preparedStatement.setString(1, textbook.getTitle());
+			preparedStatement.setString(2, textbook.getBody());
+			preparedStatement.setInt(3, textbook.getPrice());
 			
-			java.sql.Date sDate = new java.sql.Date(post.getDate().getTime());		
-			preparedStatement.setDate(3, sDate);
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -51,31 +51,31 @@ public class PostDao {
 	
 	
 	
-	public List<Post> getAllPosts() {
+	public List<Textbook> getAllPosts() {
 		/**
 		 * This method returns the list of all students in the form of a List
 		 * object.
 		 */
-		List<Post> posts = new ArrayList<Post>();
+		List<Textbook> textbooks = new ArrayList<Textbook>();
 		try {
 			Statement statement = connection.createStatement();
 			// System.out.println("getting students from table");
-			ResultSet rs = statement.executeQuery("select * from Posts");
+			ResultSet rs = statement.executeQuery("select * from Textbooks");
 			while (rs.next()) {
-				Post post = new Post();
-				post.setTitle(rs.getString("PostTitle"));
-				post.setBody(rs.getString("PostBody"));
-				post.setDate(rs.getDate("Date"));
-				post.setID(rs.getInt("PostID"));
+				Textbook textbook = new Textbook();
+				textbook.setTitle(rs.getString("TextBook"));
+				textbook.setBody(rs.getString("Description"));
+				
+				textbook.setPrice(rs.getInt("Price"));
 				
 				
-				posts.add(post);
+				textbooks.add(textbook);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return posts;
+		return textbooks;
 	}
 	
 	

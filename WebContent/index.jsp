@@ -35,8 +35,9 @@
 				<!-- You can put left sidebar links here if you want to. -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>HELLO!!</h1>
-				<p>Hello World. This is team 7 doing SKULEBUS project!</p>
+				<h1>Welcome to SKULE BUS!</h1>
+				<p>SKULE BUS is a dedicated UofT engineering Forum for engineering students
+				to ask questions <br> from the community and set up contacts and Textbook exchanges</p>
 				<hr>
 				
 				

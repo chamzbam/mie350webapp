@@ -2,11 +2,9 @@ package com.mie.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class Post {
-
-	private Integer ID;
+public class Textbook {
+	private Integer price;
 	private String title;
 	private String Body;
 	private Date date;
@@ -26,48 +24,20 @@ public class Post {
 	public void setBody(String body){
 		this.Body=body;
 	}
-	public Integer getID(){
+	public Integer getPrice(){
 		
 		
-		return this.ID;
+		return this.price;
 	}
 
 	public Date getDate() {
 		return date;
 	}
-	public void setID(int ID){
-		this.ID=ID;
+	public void setPrice(int price){
+		this.price=price;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public void addComment(Comment comment){
-		
-		postComments.add(comment);
-	}
-	public List<Comment> getComments(){
-		
-		return postComments;
-		
-		
-	}
-	
-	
-	
-	
-	
-
-	
-
-	//@Override
-	/*public String toString() {
-		return "Student [studentid=" + studentid + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", dob=" + dob + ", email="
-				+ email + "]";
-	} */
-	
-	
-	
-	
 }

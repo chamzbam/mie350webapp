@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-	<div class="container-fluid">
+	<div class="container-fluid bg-primary text-white">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#myNavbar">
@@ -13,9 +13,18 @@
 			<ul class="nav navbar-nav">
 				<li><a href="memberLogged.jsp">Home</a></li>
 				<!-- li><a href="about.jsp">About</a></li -->
+				
 				<li><a
 					href="/mie350webapp/PostController?action=listPostAdmin">Forum
-										 (Member)</a></li>
+						</a></li>		
+				
+				<li><a
+					href="/mie350webapp/TextbookController?action=listPost">Textbook Exchange
+						</a></li>		
+				<li><a
+					href="/mie350webapp/StudentController?action=listStudent">Contacts
+						</a></li>
+				
 			</ul>
 			<!-- The following code can be added to include a Login button to the right-hand side of the navbar-->
 			<ul class="nav navbar-nav navbar-right">

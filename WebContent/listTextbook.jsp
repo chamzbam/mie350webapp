@@ -70,58 +70,40 @@
 
 	<%@ include file="navbar.jsp"%>
 	<div class="header">
-	<h2>Postings</h2>
+	<h2>Textbook Exchange</h2>
 	</div>
 	
 	The time is now <b><%=new java.util.Date()%></b>.<br> <br>
-				<a class="btn btn-primary" href="PostController?action=insert">Create Post
+				<a class="btn btn-primary" href="TextbookController?action=insert">Add Textbook
 					</a> <br /> <br /> 
-	<c:forEach items="${posts}" var="post">
-	
-  <div class="container-fluid text-left">
-    
-    
-    
-    
-      <h2><c:out value="${post.getTitle()}" /></h2>
-       <p><fmt:formatDate pattern="yyyy-MMM-dd"
-										value="${post.getDate()}" /></p>
-      <p><c:out value="${post.getBody()}" /></p>
-     
-      
-       
-       <c:set var="id" value="${post.getID()}"/>
-       
-        
-       <br />
-      <form action="CommentController" method="get">
-         
-    <button name="ID" value="${post.ID}">See Comments</button>
-	</form>
-      
-      
-      
-      
-      
-      
-      </a> <br />
-      
-      
-      
-       
-       
-       <form method="POST" action='CommentController' name="frmAddPost">
-        Comment: <input type="hidden" readonly="readonly"
-						name="postID" value="<c:out value="${post.ID}" />"><br> 
- 	   <textarea rows="4" cols="50" name="comment" form="usrform">
-		Enter text here...</textarea>	
-			
- 	   <input type="submit" class="btn btn-info" value="Submit" />
- 	   </form>
-   </div>  
-    <br />   <br />
-    
-</c:forEach>
+
+
+<table border=1 class="sortable">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Description & Contact</th>
+							<th>Price</th>
+							<!-- th>DOB</th -->
+							
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${textbooks}" var="textbook">
+							<tr>
+								<td align="center"><c:out value="${textbook.getTitle()}" /></td>
+								<td align="center"><c:out value="${textbook.getBody()}" /></td>
+								<td align="center"><c:out value="${textbook.getPrice()}" /></td>
+								
+
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+
+
+
 	
 	<
 					
